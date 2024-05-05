@@ -14,7 +14,7 @@ build
 
 Cargo.toml 이 있는 디렉토리로 이동 후
 
-cargo build --target wasm32-unknown-unknown --release
+`cargo build --target wasm32-unknown-unknown --release`
 
 "wasm" 이라는 폴더 생성 후
 
