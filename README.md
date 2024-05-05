@@ -9,7 +9,9 @@ cargo install package
 build
 ================================
 `cargo new --lib hello-wasm`
+
 `dependency setting : Cargo.toml`
+
 Cargo.toml 이 있는 디렉토리로 이동 후
 
 cargo build --target wasm32-unknown-unknown --release
