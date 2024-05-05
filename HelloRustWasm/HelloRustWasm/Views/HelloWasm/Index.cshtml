@@ -1,0 +1,19 @@
+﻿<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    </head>
+    <body>
+        <script type="module">
+        import init, { add } from './wasm/hello-wasm/hello_wasm.js';
+        async function wasm_run() {
+            await init('./wasm/hello-wasm/hello_wasm_bg.wasm');
+        }
+        wasm_run().then(() => {
+            const result = add(1,2);
+            console.log(result);
+        });
+        </script>
+
+        hello rust wasm
+    </body>
+</html>
