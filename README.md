@@ -1,7 +1,9 @@
 cargo install package
 ================================
 `cargo install wasm-pack`
+
 `cargo install wasm-bindgen-cli`
+
 `cargo install basic-http-server` (?? 아마 불필요)
 
 build
