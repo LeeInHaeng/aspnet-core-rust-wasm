@@ -5,15 +5,55 @@
     <body>
         <script type="module">
         import init, { add } from './wasm/hello-wasm/hello_wasm.js';
-        async function wasm_run() {
+        async function wasm_add_run() {
             await init('./wasm/hello-wasm/hello_wasm_bg.wasm');
         }
-        wasm_run().then(() => {
+        wasm_add_run().then(() => {
             const result = add(1,2);
             console.log(result);
         });
         </script>
 
+        <script type="module">
+        const CANVAS_ID = "triangle";
+
+        import init, { draw_triangle } from './wasm/hello-webgl-wasm/hello_webgl_wasm.js';
+        async function wasm_draw_triangle_run() {
+            await init('./wasm/hello-webgl-wasm/hello_webgl_wasm_bg.wasm');
+        }
+        wasm_draw_triangle_run().then(() => {
+            const color = [1.0, 0.0, 0.0, 1.0];
+            draw_triangle(CANVAS_ID, color);
+        });
+
+        const colorChangerForm = document.getElementById("color-changer");
+        colorChangerForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            const color = [
+                clampRGBValue(e.target.elements.red.value),
+                clampRGBValue(e.target.elements.green.value),
+                clampRGBValue(e.target.elements.blue.value),
+                1.0,
+            ];
+            
+            draw_triangle(CANVAS_ID, color);
+        });
+
+        function clampRGBValue(value) {
+            return parseFloat((parseFloat(value) / 255 || 0).toFixed(2));
+        }
+        </script>
+
         hello rust wasm
+
+    <canvas id="triangle" width="400" height="400"> </canvas>
+
+    <form id="color-changer">
+        <input type="number" id="red" name="color" placeholder="Red" value="23" min="0" max="255" />
+        <input type="number" id="green" name="color" placeholder="Green" value="22" min="0" max="255" />
+        <input type="number" id="blue" name="color" placeholder="Blue" value="243" min="0" max="255" />
+        <input type="submit" value="Change color" />
+    </form>
     </body>
 </html>
